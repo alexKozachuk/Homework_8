@@ -18,11 +18,13 @@ class CitiesWheaterViewModel: ObservableObject {
     private let cityStorage = CityStorage()
     private let cityFetcher = CityFetcher()
     
-    init(weatherFetcher: WeatherFetcher) {
+    init(weatherFetcher: WeatherFetcher,
+         scheduler: DispatchQueue = DispatchQueue.init(label: "CitiesWheaterViewModel")) {
         
         self.weatherFetcher = weatherFetcher
         
         $cities
+            .debounce(for: 0.5, scheduler: scheduler)
             .sink(receiveValue: fetchCityWeather(for:))
             .store(in: &disposables)
         
