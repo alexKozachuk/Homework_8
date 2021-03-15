@@ -9,6 +9,10 @@ import SwiftUI
 
 struct CitiesWeatherView: View {
     
+    private struct Const {
+        static var spacing: CGFloat = 10
+    }
+    
     @State var showsTextAlert = false
     @State var showsErrorAlert = false
     @ObservedObject var viewModel: CitiesWheaterViewModel
@@ -39,12 +43,14 @@ struct CitiesWeatherView: View {
 private extension CitiesWeatherView {
     
     var list: some View {
-        List {
-            if viewModel.dataSource.isEmpty {
-                emptySection
-            } else {
-                citiesSection
-            }
+        ScrollView {
+            LazyVStack(spacing: Const.spacing) {
+                if viewModel.dataSource.isEmpty {
+                    emptySection
+                } else {
+                    citiesSection
+                }
+            }.padding(.top, Const.spacing)
         }
         .listStyle(GroupedListStyle())
         .navigationBarTitle("Weather", displayMode: .inline)
@@ -75,6 +81,15 @@ private extension CitiesWeatherView {
         NavigationLink( destination: DetailWeatherView(viewModel: viewModel)) {
             CityView(viewModel: viewModel)
         }
+        .contextMenu {
+            Button {
+                self.viewModel.deleteCity(by: viewModel.item.id)
+            } label: {
+                Label("Delete City", systemImage: "trash")
+            }
+        }
+        .padding(.leading, Const.spacing)
+        .padding(.trailing, Const.spacing)
     }
     
     var emptySection: some View {

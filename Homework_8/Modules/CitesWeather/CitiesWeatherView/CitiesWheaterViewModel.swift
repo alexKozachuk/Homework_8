@@ -51,6 +51,11 @@ class CitiesWheaterViewModel: ObservableObject {
         
     }
     
+
+    func deleteCity(by id: Int) {
+        cityStorage.delete(by: id)
+        cities.removeAll { $0.id == id }
+    }
     
     func fetchCityWeather(for cities: [City]) {
         

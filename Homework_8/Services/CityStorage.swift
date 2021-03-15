@@ -43,4 +43,10 @@ final class CityStorage {
         save(cities)
     }
     
+    func delete(by id: Int) {
+        var cities = getCities()
+        cities.removeAll { $0.id == id }
+        save(cities)
+    }
+    
 }
