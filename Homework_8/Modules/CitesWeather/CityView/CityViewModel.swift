@@ -12,6 +12,10 @@ struct CityViewModel: Identifiable {
     
     let item: CurrentWeather
     
+    init(item: CurrentWeather) {
+        self.item = item
+    }
+    
     var id: String {
         return "\(item.id)"
     }
@@ -22,10 +26,6 @@ struct CityViewModel: Identifiable {
     
     var temperature: String {
         return item.temp
-    }
-    
-    init(item: CurrentWeather) {
-        self.item = item
     }
     
 }

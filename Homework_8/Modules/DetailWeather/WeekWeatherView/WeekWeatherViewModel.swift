@@ -33,6 +33,7 @@ class WeekWeatherViewModel: ObservableObject {
         weatherFetcher.cityForecast(for: city)
             .map { response in
                 response.daily
+                    .dropFirst(1)
                     .prefix(4)
                     .map(DailyWeatherViewModel.init)
             }

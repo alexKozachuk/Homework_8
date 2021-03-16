@@ -222,8 +222,8 @@
 		D920360B25FE4B8E009D3BC1 /* CityView */ = {
 			isa = PBXGroup;
 			children = (
-				D920360525FE4502009D3BC1 /* CityViewModel.swift */,
 				D920360825FE4669009D3BC1 /* CityView.swift */,
+				D920360525FE4502009D3BC1 /* CityViewModel.swift */,
 			);
 			path = CityView;
 			sourceTree = "<group>";
